@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('nicommerce_theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Finalizar compra · NiCommerce</title>
+<meta name="description" content="Completá tus datos y confirmá tu pedido en NiCommerce." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a><span>/</span><span>Comprar</span>
+      </div>
+
+      <div class="section__header">
+        <div>
+          <h1>Finalizar compra</h1>
+          <p>Revisá tu carrito y completá tus datos de contacto y entrega para confirmar el pedido.</p>
+        </div>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Formulario -->
+        <div>
+          <form class="checkout-form" id="checkout-form" novalidate>
+            <div class="form-row">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej: Nicolás Gómez" required minlength="3" />
+              <span class="field-error" data-error-for="nombre"></span>
+            </div>
+
+            <div class="form-row">
+              <label for="direccion">Dirección de entrega</label>
+              <input type="text" id="direccion" name="direccion" placeholder="Calle, número, ciudad" required minlength="5" />
+              <span class="field-error" data-error-for="direccion"></span>
+            </div>
+
+            <div class="form-row form-row--split">
+              <div class="form-row">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+54 9 376 000-0000" required />
+                <span class="field-error" data-error-for="telefono"></span>
+              </div>
+              <div class="form-row">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+                <span class="field-error" data-error-for="email"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="medioPago">Medio de pago</label>
+              <select id="medioPago" name="medioPago" required>
+                <option value="" disabled selected>Seleccioná una opción</option>
+                <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+                <option value="Tarjeta de débito">Tarjeta de débito</option>
+                <option value="Transferencia bancaria">Transferencia bancaria</option>
+                <option value="Efectivo en efectivo (pago contra entrega)">Efectivo (pago contra entrega)</option>
+                <option value="Mercado Pago">Mercado Pago</option>
+              </select>
+              <span class="field-error" data-error-for="medioPago"></span>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block" id="submit-btn">Confirmar pedido</button>
+          </form>
+
+          <div class="confirmation" id="confirmation" hidden></div>
+        </div>
+
+        <!-- Carrito -->
+        <div>
+          <h2 style="margin-bottom:1rem;">Tu carrito</h2>
+          <div id="cart-mount"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/pages/comprar.js"></script>
+</body>
+</html>
